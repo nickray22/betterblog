@@ -3,8 +3,14 @@
 <h1>I don't even care about users.</h1>
 
 <ul>
-    <%  @users.each do |user| %>
-        <li>Hi there, <%= user.username %>.</li>
+    <%  @user.each do |user| %>
+        <li>Hi there, <%= user.username %>.
+          Actions:
+          <%= link_to "Your Posts", user_posts_path(user) %> |
+          <%= link_to "Delete User", user_path(user), method: :delete %>
+        </li>
     <%  end  %>
 </ul>
+<%= link_to "Create User", new_user_path %>
 <%= link_to 'Back', :back %>
+

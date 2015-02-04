@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   def index
-    @users = User.all
+    @user = User.all
     render :index
   end
 
   def show
-    @users = User.find(params[:id])
+    @user = User.find(params[:id])
     respond_to do |format|
       format.html {render :show}
       format.json {@users.to_json}
@@ -13,12 +13,12 @@ class UsersController < ApplicationController
   end
 
   def new
-    @users = User.new
+    @user = User.new
     render :new
   end
 
   def edit
-    @users = User.find(params[:id])
+    @user = User.find(params[:id])
     render :edit
   end
 
@@ -35,9 +35,15 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_path, notice: "User deleted"
+  end
 end
 
 private
-def post_params
-  params.require(:users).permit(:username, :password)
+def user_params
+  params.require(:user).permit(:username)
 end
